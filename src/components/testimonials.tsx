@@ -28,8 +28,8 @@ export function Testimonials() {
             Client Testimonials
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">
-            Don't just take our word for it. Here's what our clients have to say
-            about their experiences.
+            Don&apos;t just take our word for it. Here&apos;s what our clients
+            have to say about their experiences.
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-3">
@@ -45,7 +45,9 @@ export function Testimonials() {
                     />
                   ))}
                 </div>
-                <p className="mb-6 text-slate-600">"{testimonial.text}"</p>
+                <p className="mb-6 text-slate-600">
+                  &quot;{testimonial.text}&quot;
+                </p>
                 <div>
                   <h4 className="font-medium">{testimonial.name}</h4>
                   <p className="text-sm text-slate-500">Loyal Client</p>
