@@ -4,7 +4,7 @@ export function About() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-            About Elegance Beauty Salon
+            Apie Gelara
           </h2>
           <p className="mb-6 text-slate-600">
             Founded in 2010, Elegance Beauty Salon has been dedicated to
