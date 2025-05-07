@@ -15,7 +15,7 @@ jobs:
           node-version: 20
           cache: "npm"
       - name: Install Netlify
-        run: npm install netlify-cli@17.10.1 -g
+        run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
       - name: Install Dependencies
         run: npm i --legacy-peer-deps
       - name: Build project
