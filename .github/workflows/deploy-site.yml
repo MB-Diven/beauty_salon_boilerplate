@@ -1,8 +1,16 @@
 name: Deploy website
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      SITE_ID:
+        description: "Netlify Site ID"
+        required: true
+        type: string
+      CLIENT_ID:
+        description: "Client ID"
+        required: true
+        type: string
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,12 +28,14 @@ jobs:
         run: npm i --legacy-peer-deps
       - name: Build project
         run: npm run build
-      - name: Echo keys
-        run: echo "${{ env.SITE_ID }} ${{ env.NETLIFY_TOKEN }}"
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
           netlify deploy \
             --dir dist \
-            --site ${{ env.SITE_ID }} \
-            --auth ${{ env.NETLIFY_TOKEN }}
+            --site ${{ inputs.SITE_ID }} \
+            --auth ${{ secrets.NETLIFY_TOKEN }}
+      - name: Set environment variables
+        run: |
+          netlify env:set SITE_ID ${{ inputs.SITE_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
+          netlify env:set CLIENT_ID ${{ inputs.CLIENT_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
