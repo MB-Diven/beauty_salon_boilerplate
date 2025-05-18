@@ -1,8 +1,15 @@
 name: Deploy website
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      SITE_ID:
+        description: "Netlify Site ID"
+        required: true
+        type: string
+      CLIENT_ID:
+        description: "Client ID"
+        required: true
+        type: string
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -25,5 +32,5 @@ jobs:
         run: |
           netlify deploy \
             --dir out \
-            --site ${{ env.SITE_ID }} \
-            --auth ${{ env.NETLIFY_TOKEN }} --prod
+            --site ${{ inputs.SITE_ID }} \
+            --auth ${{ secrets.NETLIFY_TOKEN }} --prod
