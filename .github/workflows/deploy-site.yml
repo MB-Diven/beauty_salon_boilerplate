@@ -30,4 +30,6 @@ jobs:
         id: netlify_deploy
         run: |
           netlify deploy \
-            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
+                      --dir out \
+                      --site ${{ inputs.SITE_ID }} \
+                      --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
