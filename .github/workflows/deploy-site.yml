@@ -32,8 +32,6 @@ jobs:
         run: npm run build
       - name: Set environment variables
         run: |
-          netlify env:set NEXT_PUBLIC_SITE_ID ${{ inputs.SITE_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify env:set NEXT_PUBLIC_CLIENT_ID ${{ inputs.CLIENT_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify blobs:enable --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
       - name: Deploy to Netlify
         id: netlify_deploy
