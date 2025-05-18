@@ -25,7 +25,7 @@ jobs:
       - name: Install Netlify
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
       - name: Install Next.js Netlify Plugin
-        run: npm install -D @netlify/plugin-nextjs
+        run: npm install -D @netlify/plugin-nextjs --legacy-peer-deps
       - name: Install Dependencies
         run: npm i --legacy-peer-deps
       - name: Build project
