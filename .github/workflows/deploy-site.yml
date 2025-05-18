@@ -33,4 +33,4 @@ jobs:
           netlify deploy \
             --dir out \
             --site ${{ inputs.SITE_ID }} \
-            --auth ${{ secrets.NETLIFY_TOKEN }} --prod
+            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
