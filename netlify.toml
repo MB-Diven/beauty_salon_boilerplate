@@ -14,6 +14,11 @@
 [plugins.inputs]
   debug = true
 
+# Required for Next.js app router
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@netlify/plugin-nextjs"]
+
 # For any custom redirects if needed
 [[redirects]]
   from = "/*"

@@ -20,7 +20,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: "npm"
       - name: Install Netlify
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
@@ -30,9 +30,15 @@ jobs:
         run: npm i --legacy-peer-deps
       - name: Build project
         run: npm run build
+      - name: Set environment variables
+        run: |
+          netlify env:set NEXT_PUBLIC_SITE_ID ${{ inputs.SITE_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify env:set NEXT_PUBLIC_CLIENT_ID ${{ inputs.CLIENT_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify blobs:enable --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
           netlify deploy \
+            --dir .next \
             --site ${{ inputs.SITE_ID }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
