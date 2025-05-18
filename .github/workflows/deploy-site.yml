@@ -1,16 +1,8 @@
 name: Deploy website
 on:
-  workflow_dispatch:
-    inputs:
-      SITE_ID:
-        description: "Netlify Site ID"
-        required: true
-        type: string
-      CLIENT_ID:
-        description: "Client ID"
-        required: true
-        type: string
-
+  push:
+    branches:
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,16 +12,18 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: "npm"
       - name: Install Netlify
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
-      - name: Install Next.js Netlify Plugin
-        run: npm install -D @netlify/plugin-nextjs --legacy-peer-deps
+      - name: Install Dependencies
+        run: npm i --legacy-peer-deps
+      - name: Build project
+        run: npm run build
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
           netlify deploy \
-                      --dir out \
-                      --site ${{ inputs.SITE_ID }} \
-                      --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
+            --dir out \
+            --site ${{ env.SITE_ID }} \
+            --auth ${{ env.NETLIFY_TOKEN }} --prod
