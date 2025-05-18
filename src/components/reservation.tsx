@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 export function Reservation() {
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -67,6 +68,15 @@ export function Reservation() {
     setEmail("");
     setPhone("");
   };
+
+  useEffect(() => {
+    supabase
+      .from("rezervation")
+      .select("*")
+      .then(({ data }) => {
+        console.log(data);
+      });
+  }, []);
 
   return (
     <section id="reservation" className="py-20">
