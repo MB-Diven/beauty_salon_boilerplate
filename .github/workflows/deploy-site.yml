@@ -26,16 +26,10 @@ jobs:
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
       - name: Install Next.js Netlify Plugin
         run: npm install -D @netlify/plugin-nextjs --legacy-peer-deps
-      - name: Install Dependencies
-        run: npm i --legacy-peer-deps
-      - name: Build project
-        run: npm run build
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
           netlify deploy \
-            --dir .next \
-            --site ${{ inputs.SITE_ID }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
       - name: Netlify Site Info
         run: |
