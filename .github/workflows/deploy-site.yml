@@ -37,3 +37,6 @@ jobs:
             --dir .next \
             --site ${{ inputs.SITE_ID }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
+      - name: Netlify Site Info
+        run: |
+          netlify sites:info ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
