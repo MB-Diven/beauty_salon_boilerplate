@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -61,10 +60,9 @@ export function Services() {
               className="overflow-hidden border-none shadow-md transition-all duration-300 hover:shadow-lg"
             >
               <div className="relative h-48 w-full">
-                <Image
+                <img
                   src={service.image || "/placeholder.svg"}
                   alt={service.title}
-                  fill
                   className="object-cover"
                 />
               </div>
