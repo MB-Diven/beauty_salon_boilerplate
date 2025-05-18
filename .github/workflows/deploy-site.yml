@@ -32,5 +32,6 @@ jobs:
         id: netlify_deploy
         run: |
           netlify deploy \
+            --dir .next \
             --site ${{ inputs.SITE_ID }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
