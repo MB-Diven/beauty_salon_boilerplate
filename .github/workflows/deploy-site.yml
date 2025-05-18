@@ -32,10 +32,5 @@ jobs:
         id: netlify_deploy
         run: |
           netlify deploy \
-            --dir .next \
             --site ${{ inputs.SITE_ID }} \
-            --auth ${{ secrets.NETLIFY_TOKEN }}
-      - name: Set environment variables
-        run: |
-          netlify env:set SITE_ID ${{ inputs.SITE_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
-          netlify env:set CLIENT_ID ${{ inputs.CLIENT_ID }} --site ${{ inputs.SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
+            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
