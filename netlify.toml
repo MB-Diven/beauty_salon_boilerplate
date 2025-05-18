@@ -1,2 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+  
+[build.environment]
+  NEXT_RUNTIME = "nodejs18.x"
+  NODE_VERSION = "18"
+
+# For App Router SSR handling
 [[plugins]]
-package = "@netlify/plugin-nextjs"
+  package = "@netlify/plugin-nextjs"
+
+# For any custom redirects if needed
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/nextjs-app-router/:splat"
+  status = 200

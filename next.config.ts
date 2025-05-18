@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  // App Router specific settings
+  swcMinify: true, // Better minification
 };
 
 export default nextConfig;
