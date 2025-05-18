@@ -10,6 +10,10 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Debugging options
+[plugins.inputs]
+  debug = true
+
 # For any custom redirects if needed
 [[redirects]]
   from = "/*"

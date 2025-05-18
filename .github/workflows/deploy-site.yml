@@ -24,6 +24,8 @@ jobs:
           cache: "npm"
       - name: Install Netlify
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
+      - name: Install Next.js Netlify Plugin
+        run: npm install -D @netlify/plugin-nextjs
       - name: Install Dependencies
         run: npm i --legacy-peer-deps
       - name: Build project
@@ -32,6 +34,5 @@ jobs:
         id: netlify_deploy
         run: |
           netlify deploy \
-            --dir .next \
             --site ${{ inputs.SITE_ID }} \
-            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
+            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --debug
