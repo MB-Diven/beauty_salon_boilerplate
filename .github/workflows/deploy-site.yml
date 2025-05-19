@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_CLIENT_ID=${{ inputs.CLIENT_ID }}" >> .env
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
       - name: Install Netlify
         run: npm install netlify-cli@17.10.1 -g --legacy-peer-deps
       - name: Install Dependencies
