@@ -99,20 +99,12 @@ export function Reservation() {
                 <h3 className="mb-6 text-xl font-semibold text-slate-900">
                   Select a Date
                 </h3>
-                <div className="flex w-full h-full justify-content items-center">
+                <div className="flex w-full h-full justify-center items-center">
                   <Calendar
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    className="rounded-md border bg-white p-3 w-full h-full flex"
-                    classNames={{
-                      months:
-                        "flex w-full flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 flex-1",
-                      month: "space-y-4 w-full flex flex-col",
-                      table: "w-full h-full border-collapse space-y-1",
-                      head_row: "",
-                      row: "w-full mt-2",
-                    }}
+                    className="rounded-md border bg-white p-3 flex"
                     disabled={(date) => {
                       // Disable past dates and Sundays
                       const today = new Date();
