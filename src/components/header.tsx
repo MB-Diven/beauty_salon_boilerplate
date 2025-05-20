@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export function Header() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -47,7 +50,12 @@ export function Header() {
         >
           <Link href="#reservation">Book Appointment</Link>
         </Button>
-        <Button variant="outline" size="icon" className="md:hidden">
+        <Button
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          variant="outline"
+          size="icon"
+          className="md:hidden"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -66,6 +74,38 @@ export function Header() {
           </svg>
         </Button>
       </div>
+      {dropdownOpen && (
+        <div className="absolute right-0 top-16 z-50 w-48 rounded-md bg-white shadow-lg">
+          <Link
+            href="#services"
+            onClick={() => setDropdownOpen(false)}
+            className="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Services
+          </Link>
+          <Link
+            href="#about"
+            onClick={() => setDropdownOpen(false)}
+            className="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            About
+          </Link>
+          <Link
+            href="#testimonials"
+            onClick={() => setDropdownOpen(false)}
+            className="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Testimonials
+          </Link>
+          <Link
+            href="#reservation"
+            onClick={() => setDropdownOpen(false)}
+            className="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Book Now
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
