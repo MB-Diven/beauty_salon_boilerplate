@@ -1,37 +1,12 @@
 "use client";
 
 import { Salon } from "@/components/salon";
+import { useBusinessInfo } from "@/lib/context/business-context";
 import { supabase } from "@/lib/supabase";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-export interface Business {
-  id: number;
-  created_at: string;
-  businessName: string;
-  logo: string;
-  worker_ids: number[];
-  updated_at: string;
-  businessType: string;
-  auth_id: string;
-  stripe_account_id: string;
-  email: string;
-  businessDescription: string;
-  primaryColor: string;
-  inventorySize: string;
-  rentalPeriod: string;
-  contactPhone: string;
-  additionalFeatures: string[];
-  country: string;
-  ip: string;
-  unpaid_token: string;
-  product_ids: number[];
-  address: string;
-  custom_domain: string | null;
-  welcome_message: string;
-  site_id: string;
-}
 export default function Home() {
-  const [salonInfo, setSalonInfo] = useState<Business>();
+  const { setBusinessInfo } = useBusinessInfo();
 
   useEffect(() => {
     supabase
@@ -41,7 +16,7 @@ export default function Home() {
       .single()
       .then(({ data }) => {
         console.log(data);
-        setSalonInfo(data);
+        setBusinessInfo(data);
       });
   }, []);
 

@@ -1,21 +1,26 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useBusinessInfo } from "@/lib/context/business-context";
 
 export function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { businessInfo } = useBusinessInfo();
 
+  if (!businessInfo) return null;
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <img
-            src="/logo.png"
-            alt="Elegance Beauty Salon"
+            src={businessInfo.logo}
+            alt={businessInfo.businessName}
             width={40}
             height={40}
           />
-          <span className="font-serif text-xl font-medium">Demo</span>
+          <span className="font-serif text-xl font-medium">
+            {businessInfo.businessName}
+          </span>
         </Link>
         <nav className="hidden md:flex md:gap-6">
           <Link
