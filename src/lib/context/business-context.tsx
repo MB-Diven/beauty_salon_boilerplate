@@ -28,6 +28,7 @@ export interface Business {
   custom_domain: string | null;
   welcome_message: string;
   site_id: string;
+  about: string;
 }
 
 // Define the context type with just a boolean value

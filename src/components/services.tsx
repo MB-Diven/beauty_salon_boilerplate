@@ -5,41 +5,43 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useBusinessInfo } from "@/lib/context/business-context";
+import { supabase } from "@/lib/supabase";
+import { useEffect, useState } from "react";
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  photo: string;
+  duration: number;
+  description: string;
+  sales: number;
+}
 
 export function Services() {
-  const services = [
-    {
-      title: "Haircuts & Styling",
-      description:
-        "Expert cuts and styling for all hair types and preferences.",
-      image: "/services/haircut.jpg",
-    },
-    {
-      title: "Facial Treatments",
-      description: "Rejuvenating facials to nourish and revitalize your skin.",
-      image: "/services/facial.jpg",
-    },
-    {
-      title: "Nail Care",
-      description: "Manicures and pedicures with premium products.",
-      image: "/services/nails.jpg",
-    },
-    {
-      title: "Hair Coloring",
-      description: "Professional coloring services from subtle to bold.",
-      image: "/services/coloring.jpg",
-    },
-    {
-      title: "Spa Packages",
-      description: "Comprehensive spa experiences for total relaxation.",
-      image: "/services/spa.jpg",
-    },
-    {
-      title: "Makeup Services",
-      description: "Professional makeup for any occasion.",
-      image: "/services/makeup.jpg",
-    },
-  ];
+  const { businessInfo } = useBusinessInfo();
+  const [services, setServices] = useState<Product[]>([]);
+
+  useEffect(() => {
+    if (!businessInfo) return;
+
+    const fetchServices = async () => {
+      const { data } = await supabase
+        .from("products")
+        .select("*")
+        .in(
+          "id",
+          businessInfo.product_ids.map((id) => +id)
+        );
+
+      setServices(data as Product[]);
+    };
+
+    fetchServices();
+  }, [businessInfo]);
+
+  console.log(services);
 
   return (
     <section id="services" className="bg-slate-50 py-20">
@@ -61,13 +63,13 @@ export function Services() {
             >
               <div className="relative h-48 w-full">
                 <img
-                  src={service.image || "/placeholder.svg"}
-                  alt={service.title}
+                  src={service.photo || "/placeholder.svg"}
+                  alt={service.name}
                   className="object-cover"
                 />
               </div>
               <CardHeader className="pb-2">
-                <CardTitle className="text-xl">{service.title}</CardTitle>
+                <CardTitle className="text-xl">{service.name}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
