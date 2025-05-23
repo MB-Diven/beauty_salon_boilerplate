@@ -59,7 +59,7 @@ export function Services() {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="overflow-hidden pt-0 border-none shadow-md transition-all duration-300 hover:shadow-lg"
+              className="overflow-hidden pt-0 border-none shadow-md transition-all duration-300 hover:shadow-lg gap-3"
             >
               <div className="relative h-48 w-full">
                 <img
