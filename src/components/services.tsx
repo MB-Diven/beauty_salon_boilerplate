@@ -32,7 +32,7 @@ export function Services() {
         .select("*")
         .in(
           "id",
-          businessInfo.product_ids.map((id) => +id)
+          businessInfo.product_ids.map((id) => +id),
         );
 
       setServices(data as Product[]);
@@ -68,7 +68,7 @@ export function Services() {
                   className="object-cover"
                 />
               </div>
-              <CardHeader className="pb-2">
+              <CardHeader className="pt-10 md:pt-25">
                 <CardTitle className="text-xl">{service.name}</CardTitle>
               </CardHeader>
               <CardContent>

@@ -6,7 +6,7 @@ import { useBusinessInfo } from "@/lib/context/business-context";
 export function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { businessInfo } = useBusinessInfo();
-
+  console.log(businessInfo);
   if (!businessInfo) return null;
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
@@ -25,33 +25,36 @@ export function Header() {
         <nav className="hidden md:flex md:gap-6">
           <Link
             href="#services"
-            className="text-sm font-medium text-slate-700 hover:text-rose-500"
+            className="text-sm font-medium text-slate-700 hover:opacity-80"
           >
             Services
           </Link>
           <Link
             href="#about"
-            className="text-sm font-medium text-slate-700 hover:text-rose-500"
+            className="text-sm font-medium text-slate-700 hover:opacity-80"
           >
             About
           </Link>
           <Link
             href="#testimonials"
-            className="text-sm font-medium text-slate-700 hover:text-rose-500"
+            className="text-sm font-medium text-slate-700 hover:opacity-80"
           >
             Testimonials
           </Link>
           <Link
             href="#reservation"
-            className="text-sm font-medium text-slate-700 hover:text-rose-500"
+            className="text-sm font-medium text-slate-700 hover:opacity-80"
           >
             Book Now
           </Link>
         </nav>
         <Button
           asChild
+          style={{
+            backgroundColor: businessInfo.primaryColor,
+          }}
           size="sm"
-          className="hidden bg-rose-500 hover:bg-rose-600 md:inline-flex"
+          className={`hidden md:inline-flex hover:opacity-80`}
         >
           <Link href="#reservation">Book Appointment</Link>
         </Button>

@@ -17,8 +17,10 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
+import { useBusinessInfo } from "@/lib/context/business-context";
 
 export function Reservation() {
+  const { businessInfo } = useBusinessInfo();
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [time, setTime] = useState<string>("");
   const [stylist, setStylist] = useState<string>("");
@@ -78,6 +80,8 @@ export function Reservation() {
       });
   }, []);
 
+  if (!businessInfo) return null;
+
   return (
     <section id="reservation" className="py-20">
       <div className="container mx-auto px-4">
@@ -95,7 +99,10 @@ export function Reservation() {
           <CardContent className="p-0">
             <div className="flex flex-col justify-center md:flex-row">
               {/* Calendar Section - Always Visible */}
-              <div className="w-full flex flex-col justify-between bg-rose-50 p-6 md:w-1/2 md:p-8">
+              <div
+                style={{ backgroundColor: `${businessInfo.primaryColor}50` }}
+                className="w-full flex flex-col justify-between p-6 md:w-1/2 md:p-8"
+              >
                 <h3 className="mb-6 text-xl font-semibold text-slate-900">
                   Select a Date
                 </h3>
@@ -121,6 +128,24 @@ export function Reservation() {
                   Appointment Details
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {businessInfo.worker_ids.length > 1 && (
+                    <div className="space-y-2">
+                      <Label htmlFor="stylist">Select Stylist</Label>
+                      <Select value={stylist} onValueChange={setStylist}>
+                        <SelectTrigger className="w-full" id="stylist">
+                          <SelectValue placeholder="Select stylist" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {stylists.map((person) => (
+                            <SelectItem key={person} value={person}>
+                              {person}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
+
                   <div className="space-y-2">
                     <Label htmlFor="time">Select Time</Label>
                     <Select value={time} onValueChange={setTime}>
@@ -131,22 +156,6 @@ export function Reservation() {
                         {timeSlots.map((slot) => (
                           <SelectItem key={slot} value={slot}>
                             {slot}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="stylist">Select Stylist</Label>
-                    <Select value={stylist} onValueChange={setStylist}>
-                      <SelectTrigger className="w-full" id="stylist">
-                        <SelectValue placeholder="Select stylist" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {stylists.map((person) => (
-                          <SelectItem key={person} value={person}>
-                            {person}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -187,7 +196,10 @@ export function Reservation() {
 
                   <Button
                     type="submit"
-                    className="mt-4 w-full bg-rose-500 hover:bg-rose-600"
+                    className="mt-4 w-full hover:opacity-80"
+                    style={{
+                      backgroundColor: `${businessInfo.primaryColor}`,
+                    }}
                   >
                     Book Appointment
                   </Button>

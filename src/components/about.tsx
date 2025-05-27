@@ -16,17 +16,32 @@ export function About() {
           />
           <div className="flex flex-wrap justify-center gap-8">
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-rose-500">10+</span>
+              <span
+                className="text-3xl font-bold"
+                style={{ color: businessInfo?.primaryColor }}
+              >
+                10+
+              </span>
               <span className="text-sm text-slate-500">Years Experience</span>
             </div>
+            {(businessInfo?.worker_ids?.length ?? 0) > 1 && (
+              <div className="flex flex-col items-center">
+                <span
+                  className="text-3xl font-bold"
+                  style={{ color: businessInfo?.primaryColor }}
+                >
+                  {businessInfo?.worker_ids.length}+
+                </span>
+                <span className="text-sm text-slate-500">Expert Stylists</span>
+              </div>
+            )}
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-rose-500">
-                {businessInfo?.worker_ids.length}+
+              <span
+                className="text-3xl font-bold"
+                style={{ color: businessInfo?.primaryColor }}
+              >
+                5000+
               </span>
-              <span className="text-sm text-slate-500">Expert Stylists</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-rose-500">5000+</span>
               <span className="text-sm text-slate-500">Happy Clients</span>
             </div>
           </div>
